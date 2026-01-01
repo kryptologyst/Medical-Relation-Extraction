@@ -1,0 +1,43 @@
+"""Default configuration for medical relation extraction."""
+
+# Model Configuration
+model_name: "dmis-lab/biobert-base-cased-v1.1"
+max_length: 512
+num_relations: 5
+dropout_rate: 0.1
+learning_rate: 2e-5
+batch_size: 16
+num_epochs: 3
+
+# Data Configuration
+train_size: 800
+val_size: 100
+test_size: 100
+deidentify: true
+
+# Training Configuration
+seed: 42
+device: "auto"  # auto, cuda, mps, cpu
+output_dir: "outputs"
+data_dir: "data"
+
+# Evaluation Configuration
+confidence_threshold: 0.5
+save_predictions: true
+save_attention_maps: true
+
+# Relation Types
+relation_types:
+  - "treats"
+  - "causes"
+  - "prevents"
+  - "worsens"
+  - "side_effect_of"
+
+# De-identification Patterns
+deid_patterns:
+  patient_id: "\\b[A-Z]{2,3}\\d{4,6}\\b"
+  mrn: "\\bMRN:\\s*\\d+\\b"
+  date: "\\b\\d{1,2}/\\d{1,2}/\\d{4}\\b"
+  phone: "\\b\\d{3}-\\d{3}-\\d{4}\\b"
+  email: "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b"
